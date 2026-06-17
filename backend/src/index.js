@@ -39,7 +39,7 @@ app.use('/api', routes)
 app.get('/health', (_, res) => res.json({ status: 'ok', time: new Date().toISOString() }))
 
 // Temporary diagnostic endpoint — remove after debugging
-app.get('/api/debug-db', (req, res) => {
+app.get('/debug-db', (req, res) => {
   res.json({ ok: true, node: process.version, platform: process.platform, time: new Date().toISOString() })
 })
 
