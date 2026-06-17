@@ -12,10 +12,15 @@ const DB_PATH = process.env.DB_PATH || path.join(__dirname, '../../data/assure.d
 
 const dataDir = path.dirname(DB_PATH)
 if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true })
-console.error('📂 DB_PATH:', DB_PATH, '| exists:', fs.existsSync(DB_PATH))
 
-// Synchronous initialization — no top-level await, compatible with require()
-const _db = new Database(DB_PATH)
+// Initialize database — wrapped so a failure doesn't crash the whole app
+let _db = null
+let _dbError = null
+try {
+  _db = new Database(DB_PATH)
+} catch(e) {
+  _dbError = e
+}
 
 function normalizeParams(args) {
   if (args.length === 0) return []
@@ -63,20 +68,31 @@ class Stmt {
   }
 }
 
+// No-op stub returned when db is unavailable — keeps the app alive
+const _nullStmt = { get: () => null, all: () => [], run: () => ({}) }
+
 const db = {
   prepare(sql) {
+    if (!_db) return _nullStmt
     return new Stmt(sql)
   },
   exec(sql) {
-    _db.exec(sql)
+    if (_db) _db.exec(sql)
   },
   pragma(str) {
+    if (!_db) return
     try { _db.exec(`PRAGMA ${str}`) } catch {}
   },
+  get error() { return _dbError },
+}
+
+if (!_db) {
+  // Export early so the module doesn't crash — routes will see empty data
+  // but at least Express starts and /api/ping can tell us what went wrong
 }
 
 // Create tables
-db.exec(`
+if (_db) db.exec(`
   CREATE TABLE IF NOT EXISTS noticias (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     titulo TEXT NOT NULL,
@@ -218,19 +234,21 @@ db.exec(`
 `)
 
 // Migrations (safe — ignore already-exists errors)
-const migrations = [
-  "ALTER TABLE reconocimientos ADD COLUMN imagen_card_url TEXT",
-  "ALTER TABLE reconocimientos ADD COLUMN link_url TEXT",
-  "ALTER TABLE config_jwt ADD COLUMN admin_secret TEXT",
-  "ALTER TABLE noticias ADD COLUMN lang TEXT DEFAULT 'all'",
-  "ALTER TABLE recursos ADD COLUMN lang TEXT DEFAULT 'all'",
-  "ALTER TABLE reconocimientos ADD COLUMN lang TEXT DEFAULT 'all'",
-  "ALTER TABLE ranking ADD COLUMN lang TEXT DEFAULT 'all'",
-  "ALTER TABLE config_popup ADD COLUMN lang TEXT DEFAULT 'all'",
-  "ALTER TABLE recursos ADD COLUMN fecha TEXT",
-]
-for (const sql of migrations) {
-  try { _db.exec(sql) } catch {}
+if (_db) {
+  const migrations = [
+    "ALTER TABLE reconocimientos ADD COLUMN imagen_card_url TEXT",
+    "ALTER TABLE reconocimientos ADD COLUMN link_url TEXT",
+    "ALTER TABLE config_jwt ADD COLUMN admin_secret TEXT",
+    "ALTER TABLE noticias ADD COLUMN lang TEXT DEFAULT 'all'",
+    "ALTER TABLE recursos ADD COLUMN lang TEXT DEFAULT 'all'",
+    "ALTER TABLE reconocimientos ADD COLUMN lang TEXT DEFAULT 'all'",
+    "ALTER TABLE ranking ADD COLUMN lang TEXT DEFAULT 'all'",
+    "ALTER TABLE config_popup ADD COLUMN lang TEXT DEFAULT 'all'",
+    "ALTER TABLE recursos ADD COLUMN fecha TEXT",
+  ]
+  for (const sql of migrations) {
+    try { _db.exec(sql) } catch {}
+  }
 }
 
 // Seed default JWT config

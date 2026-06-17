@@ -57,6 +57,7 @@ r.get('/ping', (req, res) => {
   res.json({
     noticias: n?.n,
     recursos: r2?.n,
+    db_error: db.error ? db.error.message : null,
     write_test: writeTest,
     seed_file: seedInfo,
     seed_now: seedNow,
