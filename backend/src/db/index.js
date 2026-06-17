@@ -75,9 +75,6 @@ const db = {
   },
 }
 
-// WAL mode for better concurrency
-db.pragma('journal_mode = WAL')
-
 // Create tables
 db.exec(`
   CREATE TABLE IF NOT EXISTS noticias (
