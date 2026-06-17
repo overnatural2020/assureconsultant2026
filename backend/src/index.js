@@ -38,6 +38,24 @@ app.use('/api', routes)
 // Health check
 app.get('/health', (_, res) => res.json({ status: 'ok', time: new Date().toISOString() }))
 
+// Temporary diagnostic endpoint — remove after debugging
+app.get('/api/debug-db', async (req, res) => {
+  const { default: db } = await import('./db/index.js')
+  const { default: path2 } = await import('path')
+  const { default: fs2 } = await import('fs')
+  const { fileURLToPath: ftu } = await import('url')
+  const dir = path2.dirname(ftu(import.meta.url))
+  const dbPath = process.env.DB_PATH || path2.join(dir, '../db/../../data/assure.db')
+  res.json({
+    dbPath,
+    exists: fs2.existsSync(dbPath),
+    noticias: db.prepare('SELECT COUNT(*) as n FROM noticias').get(),
+    recursos: db.prepare('SELECT COUNT(*) as n FROM recursos').get(),
+    node: process.version,
+    platform: process.platform,
+  })
+})
+
 // Serve frontend in production
 if (process.env.NODE_ENV === 'production') {
   const frontendDist = path.join(__dirname, '../../frontend/dist')
