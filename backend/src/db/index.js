@@ -12,7 +12,7 @@ const DB_PATH = process.env.DB_PATH || path.join(__dirname, '../../data/assure.d
 
 const dataDir = path.dirname(DB_PATH)
 if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true })
-console.log('📂 DB_PATH:', DB_PATH)
+console.error('📂 DB_PATH:', DB_PATH, '| exists:', fs.existsSync(DB_PATH))
 
 // Synchronous initialization — no top-level await, compatible with require()
 const _db = new Database(DB_PATH)
