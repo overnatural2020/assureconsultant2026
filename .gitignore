@@ -1,4 +1,9 @@
 node_modules/
-dist/
+backend/dist/
 .env
 *.db
+*.db-shm
+*.db-wal
+frontend/public/uploads/
+.DS_Store
+.claude/
