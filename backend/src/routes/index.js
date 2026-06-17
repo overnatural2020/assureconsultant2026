@@ -8,10 +8,62 @@ import { requireAuth, requireAdmin, requireSuperAdmin } from '../middleware/auth
 const r = Router()
 
 // ─── TEMP DIAGNOSTIC ───────────────────────────────────────────────────────
+import path from 'path'
+import { fileURLToPath } from 'url'
+import fs from 'fs'
+const __diagdir = path.dirname(fileURLToPath(import.meta.url))
+
 r.get('/ping', (req, res) => {
   const n = db.prepare('SELECT COUNT(*) as n FROM noticias').get()
   const r2 = db.prepare('SELECT COUNT(*) as n FROM recursos').get()
-  res.json({ noticias: n?.n, recursos: r2?.n, node: process.version, platform: process.platform })
+
+  // Test write capability
+  let writeTest = 'unknown'
+  try {
+    db.prepare("INSERT INTO noticias (titulo, tipo) VALUES ('__diag__', '__diag__')").run()
+    const row = db.prepare("SELECT id FROM noticias WHERE titulo='__diag__'").get()
+    db.prepare("DELETE FROM noticias WHERE titulo='__diag__'").run()
+    writeTest = row ? 'OK:id=' + (row.id ?? row.n ?? '?') : 'NO_ROW'
+  } catch(e) { writeTest = 'ERR:' + e.message }
+
+  // Check seed file
+  const seedPath = path.join(__diagdir, '../db/seed-data.json')
+  let seedInfo = 'not_found'
+  try {
+    const exists = fs.existsSync(seedPath)
+    if (exists) {
+      const data = JSON.parse(fs.readFileSync(seedPath, 'utf8'))
+      seedInfo = 'found:noticias=' + (data.noticias?.length ?? '?') + ',recursos=' + (data.recursos?.length ?? '?')
+    }
+  } catch(e) { seedInfo = 'err:' + e.message }
+
+  // Try seeding now if empty
+  let seedNow = 'skipped'
+  if (!n?.n) {
+    try {
+      const data = JSON.parse(fs.readFileSync(seedPath, 'utf8'))
+      let ok = 0, fail = 0
+      for (const r of (data.noticias || [])) {
+        try {
+          db.prepare('INSERT OR IGNORE INTO noticias (id,titulo,tipo,resumen,contenido,imagen_url,youtube_url,fecha,destacada,created_at,updated_at,lang) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)').run(r.id,r.titulo,r.tipo,r.resumen,r.contenido,r.imagen_url,r.youtube_url,r.fecha,r.destacada,r.created_at,r.updated_at,r.lang)
+          ok++
+        } catch(e) { fail++; seedNow = 'first_err:' + e.message }
+      }
+      const afterCount = db.prepare('SELECT COUNT(*) as n FROM noticias').get()
+      seedNow = `inserted:ok=${ok},fail=${fail},after_count=${afterCount?.n}`
+    } catch(e) { seedNow = 'seed_err:' + e.message }
+  }
+
+  res.json({
+    noticias: n?.n,
+    recursos: r2?.n,
+    write_test: writeTest,
+    seed_file: seedInfo,
+    seed_now: seedNow,
+    node: process.version,
+    platform: process.platform,
+    pid: process.pid,
+  })
 })
 
 // ─── AUTH ──────────────────────────────────────────────────────────────────
