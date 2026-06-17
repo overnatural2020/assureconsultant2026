@@ -256,4 +256,28 @@ if (!adminCount?.n) {
   console.log('\n✅ Usuario admin inicial creado: username=admin, password=Admin1234!\n   ⚠️  Cambia la contraseña desde el panel de administración.\n')
 }
 
+// Seed content data if tables are empty (runs once on fresh deployment)
+const noticiasCount = db.prepare('SELECT COUNT(*) as n FROM noticias').get()
+if (!noticiasCount?.n) {
+  try {
+    const seedPath = path.join(__dirname, './seed-data.json')
+    const seedData = JSON.parse(fs.readFileSync(seedPath, 'utf8'))
+    for (const r of seedData.noticias) {
+      try { db.prepare('INSERT INTO noticias (id,titulo,tipo,resumen,contenido,imagen_url,youtube_url,fecha,destacada,created_at,updated_at,lang) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)').run(r.id,r.titulo,r.tipo,r.resumen,r.contenido,r.imagen_url,r.youtube_url,r.fecha,r.destacada,r.created_at,r.updated_at,r.lang) } catch {}
+    }
+    for (const r of seedData.recursos) {
+      try { db.prepare('INSERT INTO recursos (id,titulo,descripcion,tipo,url,imagen_url,texto_boton,seccion,orden,created_at,lang,fecha) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)').run(r.id,r.titulo,r.descripcion,r.tipo,r.url,r.imagen_url,r.texto_boton,r.seccion,r.orden,r.created_at,r.lang,r.fecha) } catch {}
+    }
+    for (const r of seedData.reconocimientos) {
+      try { db.prepare('INSERT INTO reconocimientos (id,nombre,nivel,descripcion,foto_url,imagen_card_url,link_url,mes,año,ventas,created_at,lang) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)').run(r.id,r.nombre,r.nivel,r.descripcion,r.foto_url,r.imagen_card_url,r.link_url,r.mes,r.año,r.ventas,r.created_at,r.lang) } catch {}
+    }
+    for (const r of seedData.ranking) {
+      try { db.prepare('INSERT INTO ranking (id,nombre,foto_url,nivel,ventas,posicion,mes,año,lang,created_at) VALUES (?,?,?,?,?,?,?,?,?,?)').run(r.id,r.nombre,r.foto_url,r.nivel,r.ventas,r.posicion,r.mes,r.año,r.lang,r.created_at) } catch {}
+    }
+    console.log('✅ Datos iniciales cargados desde seed-data.json')
+  } catch (e) {
+    console.error('⚠️  No se pudo cargar seed-data.json:', e.message)
+  }
+}
+
 export default db
