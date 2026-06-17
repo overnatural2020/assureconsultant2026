@@ -7,6 +7,13 @@ import { requireAuth, requireAdmin, requireSuperAdmin } from '../middleware/auth
 
 const r = Router()
 
+// ─── TEMP DIAGNOSTIC ───────────────────────────────────────────────────────
+r.get('/ping', (req, res) => {
+  const n = db.prepare('SELECT COUNT(*) as n FROM noticias').get()
+  const r2 = db.prepare('SELECT COUNT(*) as n FROM recursos').get()
+  res.json({ noticias: n?.n, recursos: r2?.n, node: process.version, platform: process.platform })
+})
+
 // ─── AUTH ──────────────────────────────────────────────────────────────────
 r.post('/auth/admin-login', (req, res) => {
   const { username, password } = req.body
