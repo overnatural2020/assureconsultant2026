@@ -2,16 +2,16 @@
 import { Router } from 'express'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import fs from 'fs'
 import db from '../db/index.js'
 import { requireAuth, requireAdmin, requireSuperAdmin } from '../middleware/auth.js'
 
 const r = Router()
+const __diagdir = path.dirname(fileURLToPath(import.meta.url))
 
 // ─── TEMP DIAGNOSTIC ───────────────────────────────────────────────────────
-import path from 'path'
-import { fileURLToPath } from 'url'
-import fs from 'fs'
-const __diagdir = path.dirname(fileURLToPath(import.meta.url))
 
 r.get('/ping', (req, res) => {
   const n = db.prepare('SELECT COUNT(*) as n FROM noticias').get()
