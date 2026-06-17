@@ -32,16 +32,16 @@ app.post('/api/upload', upload.single('file'), (req, res) => {
   res.json({ url: `/uploads/${req.file.filename}` })
 })
 
+// Temporary diagnostic endpoint — BEFORE routes to ensure it's handled first
+app.get('/api/debug-db', (req, res) => {
+  res.json({ ok: true, node: process.version, platform: process.platform, time: new Date().toISOString() })
+})
+
 // API routes
 app.use('/api', routes)
 
 // Health check
 app.get('/health', (_, res) => res.json({ status: 'ok', time: new Date().toISOString() }))
-
-// Temporary diagnostic endpoint — remove after debugging
-app.get('/debug-db', (req, res) => {
-  res.json({ ok: true, node: process.version, platform: process.platform, time: new Date().toISOString() })
-})
 
 // Serve frontend in production
 if (process.env.NODE_ENV === 'production') {
