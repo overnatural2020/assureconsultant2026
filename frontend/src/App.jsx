@@ -1,5 +1,11 @@
 // src/App.jsx
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, useLocation, useEffect } from 'react-router-dom'
+
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => { window.scrollTo(0, 0) }, [pathname])
+  return null
+}
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AuthProvider, useAuth } from './lib/AuthContext.jsx'
 import { TranslationEditProvider } from './lib/TranslationEditContext.jsx'
@@ -114,6 +120,7 @@ export default function App() {
   return (
     <QueryClientProvider client={qc}>
       <BrowserRouter>
+        <ScrollToTop />
         <AuthProvider>
           <TranslationEditProvider>
             <AppContent />
