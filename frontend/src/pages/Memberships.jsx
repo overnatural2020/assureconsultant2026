@@ -14,9 +14,49 @@ const FAMILIAR = {
 
 const SILVER = {
   planes: [
-    { titleKey: 'memberships.silver_plan_1_title', tarifaRegular: '$60', tarifaEspecial: '$50' },
-    { titleKey: 'memberships.silver_plan_2_title', tarifaRegular: '$85', tarifaEspecial: '$75' },
+    {
+      titleKey: 'memberships.silver_plan_1_title',
+      align: 'left',
+      regular: { rate: '$60', noteKey: 'memberships.silver_plan_1_regular_note', dark: false },
+      especial: { rate: '$50' },
+    },
+    {
+      titleKey: 'memberships.silver_plan_2_title',
+      align: 'right',
+      regular: { rate: '$85', noteKey: 'memberships.silver_plan_2_regular_note', dark: true },
+      especial: { rate: '$75' },
+    },
   ],
+}
+
+function SilverRateBox({ t, kind, rate, noteKey, dark }) {
+  if (kind === 'especial') {
+    return (
+      <div className="bg-[#7db8b3] border border-[#005761] rounded-2xl p-5 text-center flex flex-col justify-center items-center">
+        <p className="text-[#00565f] text-xl md:text-2xl font-bold mb-1">{t('memberships.special_rate')}</p>
+        <p className="text-5xl md:text-6xl font-extrabold text-[#00565f] leading-none mb-1">{rate}</p>
+        <p className="text-[#00565f] text-xl md:text-2xl font-bold mb-3">{t('common.monthly')}</p>
+        <span className="inline-flex items-center gap-1 bg-[#00565f] text-white text-sm font-bold px-4 py-1 rounded-full mb-3">
+          ☆ {t('common.special')}
+        </span>
+        <p className="text-xs text-[#00565f] italic leading-snug">{t('memberships.special_rate_note')}</p>
+      </div>
+    )
+  }
+  return (
+    <div
+      className={`border border-[#005761] rounded-2xl p-5 text-center flex flex-col justify-center items-center ${
+        dark ? 'bg-[#00565f]' : 'bg-[#c5e0db]'
+      }`}
+    >
+      <p className={`text-xl md:text-2xl font-bold mb-1 ${dark ? 'text-white' : 'text-[#00565f]'}`}>
+        {t('memberships.regular_rate')}
+      </p>
+      <p className="text-5xl md:text-6xl font-extrabold text-[#eb6e54] leading-none mb-1">{rate}</p>
+      <p className={`text-xl md:text-2xl font-bold ${dark ? 'text-white' : 'text-[#00565f]'}`}>{t('common.monthly')}</p>
+      <p className={`text-sm font-bold mt-4 leading-snug ${dark ? 'text-white' : 'text-[#00565f]'}`}>{t(noteKey)}</p>
+    </div>
+  )
 }
 
 function EstamosContigo({ t }) {
@@ -243,49 +283,23 @@ export default function Memberships() {
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid md:grid-cols-2 gap-8">
                 {SILVER.planes.map((plan, idx) => (
-                  <div key={idx} className="flex flex-col items-center">
-                    <div
-                      className={`inline-block px-5 py-2 rounded-lg mb-4 ${
-                        idx === 0 ? 'bg-[#7db8b3] text-[#00565f]' : 'bg-[#00565f] text-white'
-                      }`}
-                    >
-                      <h3 className="font-bold text-xl">{t(plan.titleKey)}</h3>
+                  <div key={idx}>
+                    <div className={`flex mb-4 ${plan.align === 'right' ? 'md:justify-end' : 'justify-start'}`}>
+                      <div className="inline-block px-5 py-2 rounded-lg bg-[#00565f] text-white">
+                        <h3 className="font-bold text-xl">{t(plan.titleKey)}</h3>
+                      </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-3 w-full items-stretch">
-                      <div className="flex flex-col">
-                        <div className="bg-[#7db8b3]/60 rounded-2xl p-4 text-center border border-[#005761] min-h-[160px] flex flex-col justify-center items-center">
-                          <p className="text-[#00565f] font-semibold mb-1 text-base">{t('memberships.regular_rate')}</p>
-                          <p className="text-4xl font-bold text-[#00565f] mb-1">{plan.tarifaRegular}</p>
-                          <p className="text-[#00565f] font-semibold text-base">{t('common.monthly')}</p>
-                        </div>
-                      </div>
-                      <div className="flex flex-col">
-                        <div
-                          className={`rounded-2xl p-4 text-center border border-[#005761] min-h-[160px] flex flex-col justify-center items-center ${
-                            idx === 1 ? 'bg-[#00565f]' : 'bg-[#7db8b3]'
-                          }`}
-                        >
-                          <span
-                            className={`text-xs font-bold px-3 py-1 rounded-[5px] inline-block mb-2 ${
-                              idx === 1 ? 'bg-white/20 text-white' : 'bg-[#00565f] text-white'
-                            }`}
-                          >
-                            ✦ {t('common.special')}
-                          </span>
-                          <p className={`font-semibold mb-1 text-base ${idx === 1 ? 'text-white' : 'text-[#00565f]'}`}>
-                            {t('memberships.special_rate')}
-                          </p>
-                          <p className={`text-4xl font-bold mb-1 ${idx === 1 ? 'text-white' : 'text-[#00565f]'}`}>
-                            {plan.tarifaEspecial}
-                          </p>
-                          <p className={`font-semibold text-base ${idx === 1 ? 'text-white' : 'text-[#00565f]'}`}>
-                            {t('common.monthly')}
-                          </p>
-                        </div>
-                        <p className="text-xs text-[#00565f] italic mt-2 text-center">{t('memberships.special_rate_note')}</p>
-                      </div>
+                    <div className="grid grid-cols-2 gap-4 items-stretch">
+                      <SilverRateBox
+                        t={t}
+                        kind="regular"
+                        rate={plan.regular.rate}
+                        noteKey={plan.regular.noteKey}
+                        dark={plan.regular.dark}
+                      />
+                      <SilverRateBox t={t} kind="especial" rate={plan.especial.rate} />
                     </div>
                   </div>
                 ))}
