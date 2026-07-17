@@ -328,6 +328,25 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Presentation video */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 text-center">
+        <h2 className="text-3xl font-bold text-[#00565f] mb-8" style={{ fontFamily: "'Arca Majora 3', sans-serif" }}>
+          {lang === 'en' ? 'Meet Assure For Life' : 'Conoce Assure For Life'}
+        </h2>
+        <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+          <iframe
+            className="absolute inset-0 w-full h-full rounded-2xl shadow-lg"
+            src={lang === 'en'
+              ? 'https://www.youtube.com/embed/ha8RTtWQuf0'
+              : 'https://www.youtube.com/embed/UUerSoATn_8'}
+            title="Assure For Life"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+      </div>
+
       {/* Featured news */}
       {featuredNews.length > 0 && (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
