@@ -329,7 +329,7 @@ export default function Home() {
       </div>
 
       {/* Presentation video */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 text-center">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 mb-8 text-center">
         <h2 className="text-3xl font-bold text-[#00565f] mb-8" style={{ fontFamily: "'Arca Majora 3', sans-serif" }}>
           {lang === 'en' ? 'Meet Assure For Life' : 'Conoce Assure For Life'}
         </h2>
