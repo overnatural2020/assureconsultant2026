@@ -164,24 +164,24 @@ export default function Memberships() {
                       </h3>
                     </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-4 mb-4 items-stretch">
-                    <div className="bg-[#eb6e54]/10 border border-[#eb6e54] rounded-2xl p-6 text-center flex flex-col justify-center">
+                  <div className="grid grid-cols-2 gap-4 mb-2">
+                    <div className="bg-[#eb6e54]/10 border border-[#eb6e54] rounded-2xl p-6 text-center flex flex-col justify-center min-h-[200px]">
                       <p className="text-[#00565f] mb-2 text-2xl font-bold">{t('memberships.regular_rate')}</p>
                       <p className="text-7xl text-[#eb6e54] mb-2 font-extrabold leading-none">{FAMILIAR.tarifaRegular}</p>
                       <p className="text-[#00565f] text-2xl font-bold">{t('common.monthly')}</p>
                     </div>
-                    <div className="bg-[#eb6e54]/20 border border-[#eb6e54] rounded-2xl p-6 text-center flex flex-col justify-between">
-                      <div>
-                        <p className="text-[#00565f] mb-2 text-2xl font-bold">{t('memberships.special_rate')}</p>
-                        <p className="text-7xl text-[#eb6e54] mb-2 font-extrabold leading-none">{FAMILIAR.tarifaEspecial}</p>
-                        <p className="text-[#00565f] text-2xl font-bold">{t('common.monthly')}</p>
-                      </div>
-                      <div className="mt-4">
-                        <span className="inline-flex items-center gap-1 bg-[#eb6e54] text-white text-sm font-bold px-4 py-1 rounded-full">
-                          ☆ {t('common.special')}
-                        </span>
-                        <p className="text-xs text-[#00565f] italic mt-2">{t('memberships.special_rate_note')}</p>
-                      </div>
+                    <div className="bg-[#eb6e54]/20 border border-[#eb6e54] rounded-2xl p-6 text-center flex flex-col justify-center min-h-[200px]">
+                      <p className="text-[#00565f] mb-2 text-2xl font-bold">{t('memberships.special_rate')}</p>
+                      <p className="text-7xl text-[#eb6e54] mb-2 font-extrabold leading-none">{FAMILIAR.tarifaEspecial}</p>
+                      <p className="text-[#00565f] text-2xl font-bold">{t('common.monthly')}</p>
+                    </div>
+                  </div>
+                  <div className="flex justify-end mb-4">
+                    <div className="text-right">
+                      <span className="inline-flex items-center gap-1 bg-[#eb6e54] text-white text-sm font-bold px-4 py-1 rounded-full">
+                        ☆ {t('common.special')}
+                      </span>
+                      <p className="text-xs text-[#00565f] italic mt-1">{t('memberships.special_rate_note')}</p>
                     </div>
                   </div>
                 </div>
