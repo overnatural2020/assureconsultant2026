@@ -1,6 +1,6 @@
 // src/pages/Memberships.jsx
 import { useState } from 'react'
-import { Heart, ShieldCheck } from 'lucide-react'
+import { Heart, Award } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 const BASE = 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6907ccd9d7dc18fba4a28df9'
@@ -192,7 +192,7 @@ export default function Memberships() {
               <div>
                 <div className="inline-flex items-center mb-6 self-start">
                   <div className="w-14 h-14 rounded-full bg-[#eb6e54] flex items-center justify-center z-10 flex-shrink-0">
-                    <ShieldCheck className="w-7 h-7 text-white" />
+                    <Award className="w-7 h-7 text-white" />
                   </div>
                   <div className="text-white font-black text-[1.75rem] px-5 rounded-r-xl -ml-3 bg-[#eb6e54]">
                     {t('memberships.benefits_title')}
@@ -294,7 +294,7 @@ export default function Memberships() {
               <div className="mt-8">
                 <div className="inline-flex items-center mb-6 self-start">
                   <div className="w-14 h-14 rounded-full bg-[#eb6e54] flex items-center justify-center z-10 flex-shrink-0">
-                    <ShieldCheck className="w-7 h-7 text-white" />
+                    <Award className="w-7 h-7 text-white" />
                   </div>
                   <div className="text-white font-black text-[1.75rem] px-5 rounded-r-xl -ml-3 bg-[#eb6e54]">
                     {t('memberships.benefits_title')}
