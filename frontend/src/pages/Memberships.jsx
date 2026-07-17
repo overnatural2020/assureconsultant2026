@@ -190,14 +190,10 @@ export default function Memberships() {
               <div className="border-t border-[#00565f]/20 my-8" />
 
               <div>
-                <div className="flex items-center gap-3 mb-6">
-                  <img
-                    src={`${BASE}/9cc2d8efa_DisenopaginadelconsultorMembresia-29.png`}
-                    alt="check"
-                    className="w-8 h-8 flex-shrink-0"
-                  />
-                  <h3 className="text-2xl font-extrabold text-[#00565f]" style={{ fontFamily: "'Arca Majora 3', sans-serif" }}>
-                    {t('memberships.benefits_title')}
+                <div className="inline-flex items-center gap-3 bg-[#eb6e54] text-white px-6 py-3 rounded-full mb-6">
+                  <span className="text-2xl">🤲⭐</span>
+                  <h3 className="text-xl font-extrabold" style={{ fontFamily: "'Arca Majora 3', sans-serif" }}>
+                    {t('memberships.benefits_title')}:
                   </h3>
                 </div>
                 <div className="space-y-4">
@@ -294,14 +290,10 @@ export default function Memberships() {
               </div>
 
               <div className="mt-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <img
-                    src={`${BASE}/a2a14d100_DisenopaginadelconsultorMembresia-31.png`}
-                    alt="check"
-                    className="w-8 h-8 flex-shrink-0"
-                  />
-                  <h3 className="text-2xl font-extrabold text-[#00565f]" style={{ fontFamily: "'Arca Majora 3', sans-serif" }}>
-                    {t('memberships.benefits_title')}
+                <div className="inline-flex items-center gap-3 bg-[#eb6e54] text-white px-6 py-3 rounded-full mb-6">
+                  <span className="text-2xl">🤲⭐</span>
+                  <h3 className="text-xl font-extrabold" style={{ fontFamily: "'Arca Majora 3', sans-serif" }}>
+                    {t('memberships.benefits_title')}:
                   </h3>
                 </div>
                 <div className="space-y-4">
