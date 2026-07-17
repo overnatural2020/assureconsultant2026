@@ -190,9 +190,16 @@ export default function Memberships() {
               <div className="border-t border-[#00565f]/20 my-8" />
 
               <div>
-                <h3 className="text-2xl font-bold text-[#00565f] mb-6" style={{ fontFamily: "'Arca Majora 3', sans-serif" }}>
-                  {t('memberships.benefits_title')}
-                </h3>
+                <div className="flex items-center gap-3 mb-6">
+                  <img
+                    src={`${BASE}/9cc2d8efa_DisenopaginadelconsultorMembresia-29.png`}
+                    alt="check"
+                    className="w-8 h-8 flex-shrink-0"
+                  />
+                  <h3 className="text-2xl font-extrabold text-[#00565f]" style={{ fontFamily: "'Arca Majora 3', sans-serif" }}>
+                    {t('memberships.benefits_title')}
+                  </h3>
+                </div>
                 <div className="space-y-4">
                   {BENEFIT_KEYS.map((key, i) => (
                     <div key={i} className="flex items-start gap-3 pb-4 border-b border-[#00565f]/20 last:border-0">
@@ -287,9 +294,16 @@ export default function Memberships() {
               </div>
 
               <div className="mt-8">
-                <h3 className="text-2xl font-bold text-[#00565f] mb-6" style={{ fontFamily: "'Arca Majora 3', sans-serif" }}>
-                  {t('memberships.benefits_title')}
-                </h3>
+                <div className="flex items-center gap-3 mb-6">
+                  <img
+                    src={`${BASE}/a2a14d100_DisenopaginadelconsultorMembresia-31.png`}
+                    alt="check"
+                    className="w-8 h-8 flex-shrink-0"
+                  />
+                  <h3 className="text-2xl font-extrabold text-[#00565f]" style={{ fontFamily: "'Arca Majora 3', sans-serif" }}>
+                    {t('memberships.benefits_title')}
+                  </h3>
+                </div>
                 <div className="space-y-4">
                   {SILVER_BENEFIT_KEYS.map((key, i) => (
                     <div key={i} className="flex items-start gap-3 pb-4 border-b border-[#00565f]/20 last:border-0">
