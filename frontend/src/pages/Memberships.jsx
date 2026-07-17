@@ -190,9 +190,8 @@ export default function Memberships() {
               <div className="border-t border-[#00565f]/20 my-8" />
 
               <div>
-                <div className="inline-flex items-center gap-3 bg-[#eb6e54] text-white px-6 py-3 rounded-full mb-6">
-                  <span className="text-2xl">🤲⭐</span>
-                  <h3 className="text-xl font-extrabold" style={{ fontFamily: "'Arca Majora 3', sans-serif" }}>
+                <div className="inline-flex items-center bg-[#eb6e54] text-white px-7 py-3 rounded-full mb-6">
+                  <h3 className="text-2xl font-extrabold" style={{ fontFamily: "'Arca Majora 3', sans-serif" }}>
                     {t('memberships.benefits_title')}:
                   </h3>
                 </div>
@@ -290,9 +289,8 @@ export default function Memberships() {
               </div>
 
               <div className="mt-8">
-                <div className="inline-flex items-center gap-3 bg-[#eb6e54] text-white px-6 py-3 rounded-full mb-6">
-                  <span className="text-2xl">🤲⭐</span>
-                  <h3 className="text-xl font-extrabold" style={{ fontFamily: "'Arca Majora 3', sans-serif" }}>
+                <div className="inline-flex items-center bg-[#eb6e54] text-white px-7 py-3 rounded-full mb-6">
+                  <h3 className="text-2xl font-extrabold" style={{ fontFamily: "'Arca Majora 3', sans-serif" }}>
                     {t('memberships.benefits_title')}:
                   </h3>
                 </div>
