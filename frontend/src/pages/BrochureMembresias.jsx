@@ -38,7 +38,7 @@ export default function BrochureMembresias() {
           allowFullScreen
           scrolling="no"
           title={`${t('brochure.title')} ${t('brochure.title_accent')}`}
-          className="fp-iframe block w-full aspect-[3/4] md:aspect-[3/2]"
+          className="fp-iframe block w-full aspect-video"
           src="https://heyzine.com/flip-book/5101d9d017.html"
           style={{ border: '1px solid lightgray' }}
         />
