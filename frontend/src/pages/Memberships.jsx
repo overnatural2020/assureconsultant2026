@@ -209,6 +209,12 @@ export default function Memberships() {
                       <p className="text-[#00565f] mb-2 text-2xl font-bold">{t('memberships.regular_rate')}</p>
                       <p className="text-7xl text-[#eb6e54] mb-2 font-extrabold leading-none">{FAMILIAR.tarifaRegular}</p>
                       <p className="text-[#00565f] text-2xl font-bold">{t('common.monthly')}</p>
+                      <div className="mt-4 invisible" aria-hidden="true">
+                        <span className="inline-flex items-center gap-1 bg-[#eb6e54] text-white text-sm font-bold px-4 py-1 rounded-full">
+                          ☆ {t('common.special')}
+                        </span>
+                        <p className="text-xs italic mt-2">{t('memberships.special_rate_note')}</p>
+                      </div>
                     </div>
                     <div className="bg-[#eb6e54]/20 border border-[#eb6e54] rounded-2xl p-6 text-center flex flex-col justify-between">
                       <div>
