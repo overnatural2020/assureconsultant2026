@@ -313,10 +313,10 @@ export default function Memberships() {
 
               <div className="mt-8">
                 <div className="inline-flex items-center mb-6 self-start">
-                  <div className="w-14 h-14 rounded-full bg-[#eb6e54] flex items-center justify-center z-10 flex-shrink-0">
+                  <div className="w-14 h-14 rounded-full bg-[#00565f] flex items-center justify-center z-10 flex-shrink-0">
                     <Award className="w-7 h-7 text-white" />
                   </div>
-                  <div className="text-white font-black text-[1.75rem] px-5 rounded-r-xl -ml-3 bg-[#eb6e54]">
+                  <div className="text-white font-black text-[1.75rem] px-5 rounded-r-xl -ml-3 bg-[#00565f]">
                     {t('memberships.benefits_title')}
                   </div>
                 </div>
