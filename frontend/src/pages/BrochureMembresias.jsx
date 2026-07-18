@@ -31,15 +31,16 @@ export default function BrochureMembresias() {
         </div>
       </div>
 
-      {/* Flipbook — full width */}
+      {/* Flipbook — full width, aspect-ratio adapts to viewport so there is
+          no empty space (cross-origin iframe can't auto-size to its content) */}
       <section className="w-full">
         <iframe
           allowFullScreen
           scrolling="no"
           title={`${t('brochure.title')} ${t('brochure.title_accent')}`}
-          className="fp-iframe"
+          className="fp-iframe block w-full aspect-[3/4] md:aspect-[3/2]"
           src="https://heyzine.com/flip-book/5101d9d017.html"
-          style={{ border: '1px solid lightgray', width: '100%', height: '100vh' }}
+          style={{ border: '1px solid lightgray' }}
         />
       </section>
 
