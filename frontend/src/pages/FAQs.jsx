@@ -1,103 +1,258 @@
 // src/pages/FAQs.jsx
 import { useState } from 'react'
 import { ChevronDown, ChevronUp } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 const BASE = 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6907ccd9d7dc18fba4a28df9'
 const MEDIA = 'https://media.base44.com/images/public/6907ccd9d7dc18fba4a28df9'
 
-const FAQS = [
+const FAQS_ES = [
   {
-    pregunta: "1. ¿What Is Assure ForLife?",
-    respuesta: "Assure for Life offers a Preneed Funeral Assistance Membership in the United States. As a member, you receive important benefits that the membership provides, allowing your loved ones to have tranquility about the funeral and services by enrolling in the membership plan.",
-  },
-  {
-    pregunta: "2. ¿What benefits are covered in the United States?",
-    respuesta: `Benefits for basic funeral services:
-• Transfer of the deceased to the local funeral home provider
-• Transportation of body
-• Basic viewing service
-• Embalming/body viewing
-• Funeral urn (cremation)
-• All other benefits
+    pregunta: '1. ¿Qué es Assure For Life?',
+    respuesta: `Assure For Life ofrece una Membresía de Coordinación de Servicios Funerarios en los Estados Unidos.
 
-Includes:
-Air tickets, round trip, exclusively for the entire family to attend the funeral of the member, for the 5 closest family members.
-• One immediate personal assistance, once the member passes away, a new claim can then be submitted for all the members of the family.
-• An additional member can be included within all state boundaries.
-No geographical limitations on any claim, to the U.S. or in any country in America.`,
+A diferencia de un seguro o un contrato de previsión funeraria, esta membresía no entrega sumas de dinero. En su lugar, al convertirte en miembro, brindamos acompañamiento integral en la planificación y coordinación de los servicios funerarios para los seres queridos fallecidos, mediante la contratación de proveedores de servicios funerarios.`,
   },
   {
-    pregunta: "3. ¿Who can replace a primary member in a Family Plan when he or she passes away?",
-    respuesta: "After the death of the primary person/member, any one of the members, immediately family of the new can then be set as the primary member by our systems/processes.",
+    pregunta: '2. ¿Qué beneficios están cubiertos en los Estados Unidos?',
+    respuesta: `Cobertura de los servicios funerarios básicos:
+• Traslado del fallecido al proveedor local de servicios funerarios.
+• Preparación del cuerpo.
+• Tiempo básico para el velorio.
+• Ataúd para el velorio.
+• Honorarios del Director Funerario.
+• Libro de firmas y recordatorios.
+• Certificado de defunción.
+
+Además:
+• Tiquete aéreo de ida y regreso, exclusivamente para el titular, con el fin de asistir al funeral de uno de los miembros del plan.
+• Opción de cremación: cremación y urna para las cenizas.
+• Opción de sepultura: ataúd básico y carroza fúnebre hasta el cementerio (no incluye los costos del cementerio en EE. UU.).`,
   },
   {
-    pregunta: "4. ¿When a member passes away, how soon can they be replaced with someone else?",
-    respuesta: "When a member passes away, the new member can be enrolled right after application, not for an immediate or the next service's dates or before, in accordance with the regulations and membership registration requirements.",
+    pregunta: '3. ¿Quién puede reemplazar al titular de un Plan Familiar cuando fallece?',
+    respuesta: `Cuando el titular del plan fallece, puede ser reemplazado inmediatamente por cualquiera de los miembros actuales del plan o por un nuevo miembro que cumpla con los requisitos.`,
   },
   {
-    pregunta: "5. ¿How much does the company pay for a funeral service?",
-    respuesta: "Assure for Life pays up to a certain amount and does not exceed it in accordance in case of the members' funeral benefits, through a reputable supplier or different funeral home, according to the funds paid in the account.",
+    pregunta: '4. Cuando fallece un miembro del plan, ¿cuándo puede ser reemplazado?',
+    respuesta: `Cuando fallece un miembro (que no sea el titular del plan), el reemplazo podrá realizarse en la siguiente fecha de aniversario de la membresía.
+El titular deberá comunicarse con la compañía para completar la nueva solicitud.`,
   },
   {
-    pregunta: "6. ¿What is the waiting period for getting the benefits of the memberships?",
-    respuesta: "Assure for Life reserves the right to apply a limitation after the membership has been active. Natural and Accidental death will provide cover until the process has been payment required. Assure for Life specifically states that an IEC membership does not require an age requirement.",
+    pregunta: '5. ¿Cuánto paga la compañía por un servicio funerario?',
+    respuesta: `Assure For Life no garantiza una suma específica de dinero, ya que está autorizada únicamente para brindar asistencia mediante un proveedor funerario independiente y de reconocida trayectoria, ubicado cerca del lugar donde se requiera el servicio.`,
   },
   {
-    pregunta: "7. ¿What are the preexisting conditions not accepted at the time of purchasing a plan?",
-    respuesta: "All medical conditions. Please be informed at the time of the membership must be limited to a funeral assistance program to pay for any and all death claims.",
+    pregunta: '6. ¿Cuál es el período de espera para acceder a los beneficios?',
+    respuesta: `A partir del tercer día hábil después de la inscripción y una vez realizado el primer pago, Assure For Life cubre fallecimientos por:
+• Accidente.
+• Muerte violenta.
+• Suicidio.
+
+Las muertes por causas naturales están cubiertas 180 días calendario después de haber realizado el primer pago.`,
   },
   {
-    pregunta: "8. ¿What are the age conditions to be a member of a Family Plan?",
-    respuesta: "There are 7 people included from 0 to 65. When a member reaches a maximum of two, confirmation must be made for compliance, for the service provision of two, confirmations of use, confirmations of families, and removals, that will give you all of the membership to plan.",
+    pregunta: '7. ¿Qué condiciones preexistentes no son aceptadas al adquirir una membresía?',
+    respuesta: `Al momento de la inscripción, el titular o cualquiera de los miembros del plan no debe:
+• Tener una enfermedad terminal.
+• Tener diagnóstico de cáncer.
+• Estar en tratamiento de diálisis.
+• Tener un tumor cerebral.`,
   },
   {
-    pregunta: "9. ¿What are the special rate states?",
-    respuesta: "Special states include: Florida, New Jersey, Virginia, Carolina del Norte, New York, California and other states.",
+    pregunta: '8. ¿Cuáles son las condiciones de edad para pertenecer a un Plan Familiar?',
+    respuesta: `Se pueden incluir miembros de hasta 65 años, sin importar el parentesco con el titular.
+También pueden incluirse hasta dos padres o la pareja del titular, con una edad máxima de 80 años, únicamente al momento de la inscripción.
+La cobertura permanecerá vigente siempre que la membresía continúe pagándose.`,
   },
   {
-    pregunta: "10. ¿What to do when a member passes?",
-    respuesta: "The policyholder is immediately to contact our 24/7 to find the case damage. Help by call 1 855 0 2 507.",
+    pregunta: '9. ¿Cuáles son los estados con tarifa especial?',
+    respuesta: `Los estados con tarifa especial son:
+• Florida
+• Carolina del Norte
+• Carolina del Sur
+• Nueva York
+• California
+• Puerto Rico`,
   },
   {
-    pregunta: "11. ¿When can I make changes to my funeral assistance membership?",
-    respuesta: "Changes to the membership are processed to allow membership status changes as long as permitted by our plan. Changes in the membership may be made no later than 30 days from the initial enrollment date from the membership date to the 5th of the month from the effective date of the membership policy to the 5th of the month from the effective date of membership, and including the affective date of family, members, otherwise able to find add options to active.",
+    pregunta: '10. ¿Qué hacer cuando fallece un miembro?',
+    respuesta: `El titular o cualquier miembro del plan debe comunicarse inmediatamente con nuestra línea de emergencias funerarias disponible las 24 horas:
+1-888-815-5817`,
   },
   {
-    pregunta: "12. ¿What plan can I offer to a 66 years old person?",
-    respuesta: "Yes, as a Family Membership Plan at a Silver rate. Fit the appropriate plan as a member in some context.",
+    pregunta: '11. ¿Cuándo puedo realizar cambios en mi membresía?',
+    respuesta: `Los cambios únicamente pueden realizarse:
+• Durante los primeros 3 días después de enviar la solicitud de inscripción.
+• En cada fecha de aniversario de la membresía.
+
+Si fallece el titular, podrá ser reemplazado inmediatamente por un miembro actual o por un nuevo miembro que cumpla con los requisitos.
+
+Para realizar cambios, deberá enviar un correo electrónico a:
+contracts@assureforlife.com
+
+Incluyendo la siguiente información:
+• Nombre completo.
+• Fecha de nacimiento.
+• Nacionalidad.
+• Relación con el titular.
+• Ciudad.
+• Estado.`,
   },
   {
-    pregunta: "13. ¿What plan can I offer to a 75 years old person?",
-    respuesta: "Assure for Life can only be offered when for a person over 27 years old.",
+    pregunta: '12. ¿Qué plan puedo ofrecer a una persona de 73 años?',
+    respuesta: `Puede ofrecer el Plan Silver (de 66 a 75 años) si la persona no tiene hijos.
+Si tiene hijos, el plan recomendado es el Plan Familiar.`,
   },
   {
-    pregunta: "14. ¿Is the renewal automatic?",
-    respuesta: "Due to membership rules, memberships are automatically renewed.",
+    pregunta: '13. ¿Qué plan puedo ofrecer a una persona de 92 años?',
+    respuesta: `Assure For Life no ofrece membresías para personas mayores de 80 años.`,
   },
   {
-    pregunta: "15. ¿When do pay periods begin and close?",
-    respuesta: "Billing typically falls between the 5th day and the month's day from the 15th of the payment, 5th of the 10 and 15th of the month according to the payment date. However any verbal statements between the 5th to the 25th, count after all have been authorized, pay in the month in the system administrator reads your paid cover but no applicables all the types of portfolio.",
+    pregunta: '14. ¿La renovación es automática?',
+    respuesta: `Sí. La membresía se renueva automáticamente en la fecha de aniversario.`,
   },
   {
-    pregunta: "16. ¿What does consultants get that their sales commissions paid?",
-    respuesta: "Consultants will be paid bonuses on a financial each month. 5% payment when they decide to meet the applicable states from the account of each approved. Confirm the direct approved paid the membership plan with each agreed number above, the last two months, our business sales, and ask both your sales, time to sales from the minimum of and to agree above.",
+    pregunta: '15. ¿Cuándo comienzan y terminan los períodos de pago?',
+    respuesta: `Los períodos de pago son:
+• Del 1 al 15 de cada mes, con cierre a las 5:00 p. m. (ET).
+• Del 16 al 30 o 31 de cada mes, con cierre a las 5:00 p. m. (ET).`,
   },
   {
-    pregunta: "17. ¿What are the monthly requirements to maintain or upgrade the commission level?",
-    respuesta: "Every month you must maintain a minimum active number of new membership-based member based on the number of sales according to your current program level. If you are current at all levels once for the next 3 months period of the new in December, for the maximum three months plan being will change requirements appropriately to their next.",
+    pregunta: '16. ¿Cuándo reciben los consultores el pago de sus comisiones?',
+    respuesta: `Las comisiones serán transferidas a la institución financiera entre 3 y 5 días hábiles después del cierre del período de pago.
+Antes del primer pago se enviará un depósito de prueba. Una vez sea confirmado correctamente por la institución financiera, el pago será procesado dos días hábiles después.`,
   },
   {
-    pregunta: "18. ¿Can a person in Latin America or the Caribbean become a consultant?",
-    respuesta: "Yes, one specific billing in the United States America. 4 to 200 additional by Visa is in the United States.",
+    pregunta: '17. ¿Cuáles son los requisitos mensuales para mantener o subir de nivel de comisiones?',
+    respuesta: `Cada mes deberás:
+• Realizar al menos dos ventas personales.
+• Mantener el volumen de ventas correspondiente a tu categoría.
+
+Si durante tres meses consecutivos no alcanzas el volumen requerido, en el cuarto mes recibirás comisiones de acuerdo con tus ventas actuales.
+Si no realizas ventas durante seis meses consecutivos, tu estatus como consultor será desactivado.`,
   },
   {
-    pregunta: "19. ¿Is a state license required to become a consultant?",
-    respuesta: "Assure for Life is a membership, therefore a state insurance may not be required. You must not be in the same company or insurance company.",
+    pregunta: '18. ¿Puede una persona de Latinoamérica o el Caribe convertirse en consultor?',
+    respuesta: `No.
+Únicamente las personas que residen en los Estados Unidos pueden convertirse en consultores.
+Es indispensable contar con un Tax ID o un Número de Seguro Social (Social Security Number).`,
+  },
+  {
+    pregunta: '19. ¿Se requiere una licencia estatal para convertirse en consultor?',
+    respuesta: `No.
+Assure For Life ofrece una membresía, por lo que no se requiere una licencia estatal.
+Sin embargo, es obligatorio completar la certificación de Assure For Life para poder desempeñarse como consultor.`,
+  },
+]
+
+const FAQS_EN = [
+  {
+    pregunta: '1. What is Assure For Life?',
+    respuesta: `Assure For Life offers a Professional Funeral Assistance Membership in the United States.
+
+Unlike insurances or prepaid funeral contracts, this membership does not provide monetary sums. Instead, upon becoming a member, we offer comprehensive support in the planning and organization of funerals for deceased loved ones, by contracting funeral service providers.`,
+  },
+  {
+    pregunta: '2. What benefits are covered in the United States?',
+    respuesta: `Payment for basic funeral services:
+• Transfer of the deceased to the local funeral service provider.
+• Preparation of the body.
+• Basic viewing time.
+• Coffin for the viewing.
+• Funeral Director's fees.
+• Book of signatures and reminders.
+• A death certificate.
+
+Besides:
+• Airline ticket, round trip, exclusively for the holder, in order to attend the funeral of the members of the plan.
+• Cremation option: cremation and urn for ashes.
+• Burial option: Basic casket and hearse to the cemetery (does not include cemetery fees in the US).`,
+  },
+  {
+    pregunta: '3. Who can replace a primary member in a Family Plan when he or she passes away?',
+    respuesta: `When the primary member passes away, he or she may be replaced immediately by any of the current members or by a new qualifying member.`,
+  },
+  {
+    pregunta: '4. When a member passes away, how soon can they be replaced with someone else?',
+    respuesta: `When a member (non-plan holder) passes away, an eligible replacement can be completed on the next anniversary date of the plan. The plan holder must communicate with the company to complete the new application.`,
+  },
+  {
+    pregunta: '5. How much does the company pay for a funeral service?',
+    respuesta: `Assure For Life does not guarantee a specific amount because it is authorized to deliver assistance only, through a reputable independent funeral home, near the client's area or as required.`,
+  },
+  {
+    pregunta: '6. What is the waiting period for getting the benefits of the memberships?',
+    respuesta: `Starting on the third business day after enrollment, after the first payment has been made, Assure For Life covers accidental, violent death, or suicide.
+
+Assure For Life covers death by natural causes 180 calendar days after making the first payment.`,
+  },
+  {
+    pregunta: '7. What are the preexisting conditions not accepted at the time of purchasing a plan?',
+    respuesta: `At the time of enrollment, the plan holder or any of its members must not be terminally ill, have a cancer diagnosis, be on dialysis, or have a brain tumor.`,
+  },
+  {
+    pregunta: '8. What are the age conditions to be a member of a Family Plan?',
+    respuesta: `Members age 65 or younger can be included, regardless of kinship to the holder.
+Parents or partner of the plan holder up to 80 years of age, a maximum of two, can be added at the time of enrollment, and coverage will not expire as long as the membership is paid.`,
+  },
+  {
+    pregunta: '9. What are the special rate states?',
+    respuesta: `Special rate states include Florida, North Carolina, South Carolina, New York, California, and Puerto Rico.`,
+  },
+  {
+    pregunta: '10. What to do when a member passes?',
+    respuesta: `The plan holder or any member must call our 24-hour funeral emergency line at 1 888-815-5817.`,
+  },
+  {
+    pregunta: '11. When can I make changes to my funeral assistance membership?',
+    respuesta: `Changes to the funeral assistance membership can be made only within 3 days after submitting the application or on each anniversary date. If the primary member passes away, he or she may be replaced immediately by any of the current members or by a new member who meets the requirements.
+
+Steps to change the funeral assistance membership include forwarding an email to contracts@assureforlife.com as well as including full name, date of birth, nationality, holder's relationship, city, and state.`,
+  },
+  {
+    pregunta: '12. What plan can I offer to a 73 years old person?',
+    respuesta: `You can offer the Silver Plan (from 66 to 75 years old) if the person has no children; otherwise, the Family Plan is the best option.`,
+  },
+  {
+    pregunta: '13. What plan can I offer to a 92 years old person?',
+    respuesta: `Assure For Life does not offer plans for people over 80 years old.`,
+  },
+  {
+    pregunta: '14. Is the renewal automatic?',
+    respuesta: `On the anniversary date, the membership is automatically renewed.`,
+  },
+  {
+    pregunta: '15. When do pay periods begin and close?',
+    respuesta: `The first pay period schedule is between the 1st day of the month through the 15th, and closes at 5 p.m. ET.
+The second pay period schedule is between the 16th through the 30th or 31st and closes at 5 p.m. ET.`,
+  },
+  {
+    pregunta: '16. When do consultants get their sales commissions paid?',
+    respuesta: `Your payment will be transferred to your financial institution 3 to 5 business days after the pay period closes. Confirm the payment with your bank. Prior to your initial payment, a test amount will be sent to your financial institution. Upon successful receipt, two business days later your payment will be sent out.`,
+  },
+  {
+    pregunta: '17. What are the monthly requirements to maintain or upgrade the commission level?',
+    respuesta: `Every month, you must make a minimum of two personal sales and maintain the number of sales corresponding to your current category level. If you do not have the number of sales in that category for three consecutive months, in the fourth month you will receive commissions according to current sales.
+
+If you do not make any sales for six consecutive months, your status as a consultant will become deactivated in the company.`,
+  },
+  {
+    pregunta: '18. Can a person in Latin America or the Caribbean become a consultant?',
+    respuesta: `No, only people living in the USA can become consultants. A Tax ID or Social Security Number is required.`,
+  },
+  {
+    pregunta: '19. Is a state license required to become a consultant?',
+    respuesta: `Assure For Life is a membership, therefore a state license is not required. You must get certified with Assure For Life to become a consultant.`,
   },
 ]
 
 export default function FAQs() {
   const [open, setOpen] = useState(null)
+  const { i18n } = useTranslation()
+
+  const isEs = (i18n.language || 'es').toLowerCase().startsWith('es')
+  const FAQS = isEs ? FAQS_ES : FAQS_EN
 
   const toggle = (i) => setOpen(open === i ? null : i)
 
