@@ -20,39 +20,27 @@ export default function BrochureMembresias() {
   return (
     <div className="min-h-screen bg-white">
 
-      {/* Hero — teal bg */}
-      <section className="relative bg-[#7db8b3] overflow-hidden">
-        <div className="max-w-7xl mx-auto relative flex flex-col md:flex-row" style={{ minHeight: '480px' }}>
-          <div className="absolute rounded-full bg-[#fcc46a] opacity-90 pointer-events-none" style={{
-            width: '380px', height: '380px',
-            top: '55%', left: '70%',
-            transform: 'translate(-50%, -50%)',
-            zIndex: 1,
-          }} />
-
-          {/* Left: text */}
-          <div className="relative w-full md:w-[40%] flex flex-col justify-center px-6 md:px-12 py-14 md:py-20" style={{ zIndex: 2 }}>
-            <div className="relative inline-block mb-5">
-              <div className="absolute top-[-2px] left-[-3px] w-[18px] h-[18px] bg-[#eb6e54] rounded-full z-0" />
-              <h1 className="relative z-10 text-white leading-tight" style={{ fontFamily: "'Arca Majora 3', sans-serif", fontSize: 'clamp(2.2rem, 4vw, 3.2rem)' }}>
-                {t('brochure.title')}<br /><span className="text-[#00565f]">{t('brochure.title_accent')}</span>
-              </h1>
-            </div>
-            <p className="text-white/90 leading-relaxed max-w-xs" style={{ fontSize: '1.25rem' }}>
-              {t('brochure.subtitle')}
-            </p>
-          </div>
-
-          {/* Right: family image */}
-          <div className="w-full md:w-[60%] flex items-end" style={{ minHeight: '340px', paddingRight: '3rem', zIndex: 2 }}>
-            <img
-              src={`${MEDIA}/a984c6d43_Imagendefamilia.png`}
-              alt="Imagen de familia"
-              className="w-full object-cover object-center block"
-              style={{ maxHeight: '420px' }}
-            />
-          </div>
+      {/* Title — same style as Resources "Centro de recursos" */}
+      <div className="text-center pt-12 mb-8 px-4">
+        <div className="relative inline-block">
+          <div className="absolute top-[-2px] left-[-3px] w-[18px] h-[18px] bg-[#eb6e54] rounded-full z-0" />
+          <h1 className="relative z-10 text-5xl md:text-6xl font-bold" style={{ fontFamily: "'Arca Majora 3', sans-serif" }}>
+            <span className="text-[#7db8b3]">{t('brochure.title')} </span>
+            <span className="text-[#00565f]">{t('brochure.title_accent')}</span>
+          </h1>
         </div>
+      </div>
+
+      {/* Flipbook — full width */}
+      <section className="w-full">
+        <iframe
+          allowFullScreen
+          scrolling="no"
+          title={`${t('brochure.title')} ${t('brochure.title_accent')}`}
+          className="fp-iframe"
+          src="https://heyzine.com/flip-book/5101d9d017.html"
+          style={{ border: '1px solid lightgray', width: '100%', height: '100vh' }}
+        />
       </section>
 
       {/* Info card */}
