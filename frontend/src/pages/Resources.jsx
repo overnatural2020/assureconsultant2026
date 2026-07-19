@@ -37,8 +37,6 @@ const TABS = [
   { id: 'material_ventas', labelKey: 'resources.tab_sales', icon: FileText },
   { id: 'video_capacitacion', labelKey: 'resources.tab_training', icon: Video },
   { id: 'plantilla_digital', labelKey: 'resources.tab_templates', icon: Layout },
-  { id: 'manual_guia', labelKey: 'resources.tab_manuals', icon: BookOpen },
-  { id: 'equipo', labelKey: 'resources.tab_team', icon: Users },
 ]
 
 function ResourceCard({ recurso, onVerVideo }) {
@@ -174,8 +172,7 @@ export default function Resources() {
                 }`}
               >
                 <Icon className={`w-4 h-4 ${isActive ? '' : 'text-[#00565f]'}`} />
-                <span className="hidden sm:inline">{t(tab.labelKey)}</span>
-                <span className="sm:hidden">{t(tab.labelKey).split(' ')[0]}</span>
+                <span>{t(tab.labelKey)}</span>
               </button>
             )
           })}
