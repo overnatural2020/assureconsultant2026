@@ -97,28 +97,14 @@ function ResourceModal({ initial, onSave, onClose, loading }) {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium mb-1">Sección</label>
-              <select
-                value={form.seccion}
-                onChange={e => set('seccion', e.target.value)}
-                className="w-full px-3 py-2.5 rounded-lg bg-[#00565f] border border-white/30 text-white text-sm focus:outline-none focus:border-white"
-              >
-                <option value="consultores">Consultores</option>
-                <option value="equipo">Equipo</option>
-                <option value="ambos">Ambos</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Fecha</label>
-              <input
-                type="date"
-                value={form.fecha}
-                onChange={e => set('fecha', e.target.value)}
-                className="w-full px-3 py-2.5 rounded-lg bg-[#00565f] border border-white/30 text-white text-sm focus:outline-none focus:border-white"
-              />
-            </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Fecha</label>
+            <input
+              type="date"
+              value={form.fecha}
+              onChange={e => set('fecha', e.target.value)}
+              className="w-full px-3 py-2.5 rounded-lg bg-[#00565f] border border-white/30 text-white text-sm focus:outline-none focus:border-white"
+            />
           </div>
 
           {/* Archivo */}
