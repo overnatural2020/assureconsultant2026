@@ -5,6 +5,5 @@ frontend/dist/
 *.db
 *.db-shm
 *.db-wal
-frontend/public/uploads/
 .DS_Store
 .claude/
