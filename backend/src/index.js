@@ -22,8 +22,9 @@ app.use(cors({
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ extended: true }))
 
-// File uploads
-const uploadsDir = path.join(__dirname, '../../frontend/public/uploads')
+// File uploads — in production UPLOADS_DIR points at a persistent volume so
+// uploaded files survive redeploys; locally it falls back to the source folder.
+const uploadsDir = process.env.UPLOADS_DIR || path.join(__dirname, '../../frontend/public/uploads')
 if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true })
 const storage = multer.diskStorage({
   destination: uploadsDir,
@@ -34,6 +35,10 @@ app.post('/api/upload', upload.single('file'), (req, res) => {
   if (!req.file) return res.status(400).json({ error: 'No file' })
   res.json({ url: `/uploads/${req.file.filename}` })
 })
+
+// Serve uploaded files. Mounted before the frontend build so freshly uploaded
+// files win; older images baked into the build still resolve via the dist below.
+app.use('/uploads', express.static(uploadsDir))
 
 // Temporary diagnostic endpoint — BEFORE routes to ensure it's handled first
 app.get('/api/debug-db', (req, res) => {
