@@ -8,13 +8,10 @@ import { Plus, Pencil, Trash2, X, CheckCircle, Upload, Loader2 } from 'lucide-re
 import LangSelector from '../../components/LangSelector.jsx'
 import TranslateDuplicateButton from '../../components/TranslateDuplicateButton.jsx'
 
-// Labels must match the public filter tabs in pages/Resources.jsx.
-// manual_guia has no tab left, so its resources only show under "Todos".
 const TIPOS = [
   { value: 'material_ventas', label: 'Soy un Consultor nuevo' },
   { value: 'video_capacitacion', label: 'Quiero vender' },
   { value: 'plantilla_digital', label: 'Deseo crecer' },
-  { value: 'manual_guia', label: 'Manuales y Guías (sin pestaña)' },
 ]
 
 const BOTONES = ['Descargar', 'Ver video', 'Abrir', 'Acceder']
