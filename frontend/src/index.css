@@ -33,6 +33,83 @@
 .rich-content li { margin: 0.2rem 0; }
 .rich-content blockquote { border-left: 3px solid #d1d5db; padding-left: 1rem; margin: 0.75rem 0; color: #6b7280; font-style: italic; }
 
+/* ── Accessibility (ADA) toolbar ──────────────────────────────────────────
+   Classes are toggled on <html> by components/AccessibilityWidget.jsx.
+   The widget itself carries .a11y-ui and is excluded from the effects that
+   would make it unreadable, so it stays usable in every mode.           */
+
+/* Grayscale: filter lives on <html> so fixed positioning keeps working */
+html.a11y-grayscale { filter: grayscale(100%); }
+
+/* Legible font */
+html.a11y-readable body,
+html.a11y-readable body * {
+  font-family: Verdana, Tahoma, 'Trebuchet MS', sans-serif !important;
+}
+
+/* Text spacing */
+html.a11y-spacing body * {
+  line-height: 2 !important;
+  letter-spacing: 0.06em !important;
+  word-spacing: 0.12em !important;
+}
+
+/* Highlight links */
+html.a11y-links body a {
+  text-decoration: underline !important;
+  text-underline-offset: 2px;
+  outline: 2px solid #eb6e54 !important;
+  outline-offset: 2px;
+  background-color: #fff3cd !important;
+  color: #00363d !important;
+}
+
+/* Large cursor */
+html.a11y-bigcursor, html.a11y-bigcursor * {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path d="M5 2l14 9-6 1.5L15 20l-3 1-2-7-5 4z" fill="%23000000" stroke="%23ffffff" stroke-width="1.3"/></svg>') 2 2, auto !important;
+}
+
+/* Stop animations */
+html.a11y-noanim *,
+html.a11y-noanim *::before,
+html.a11y-noanim *::after {
+  animation-duration: 0s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0s !important;
+  scroll-behavior: auto !important;
+}
+
+/* High contrast */
+html.a11y-contrast body,
+html.a11y-contrast body * {
+  background-color: #000000 !important;
+  background-image: none !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+html.a11y-contrast body a,
+html.a11y-contrast body a * { color: #ffff00 !important; }
+html.a11y-contrast body button,
+html.a11y-contrast body input,
+html.a11y-contrast body select,
+html.a11y-contrast body textarea { outline: 1px solid #ffffff !important; }
+html.a11y-contrast body img { filter: contrast(1.1) brightness(1.1); }
+
+/* Keep the widget itself readable in every mode (higher specificity wins) */
+html.a11y-contrast .a11y-ui,
+html.a11y-contrast .a11y-ui * {
+  background-color: #00565f !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+html.a11y-contrast .a11y-ui a { color: #ffff00 !important; }
+html.a11y-spacing .a11y-ui,
+html.a11y-spacing .a11y-ui * {
+  line-height: normal !important;
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
+}
+
 @layer utilities {
   .line-clamp-2 {
     display: -webkit-box;

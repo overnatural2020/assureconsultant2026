@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useAuth } from '../../lib/AuthContext.jsx'
 import { Menu, X, Shield, Globe, ChevronDown } from 'lucide-react'
 import EditableT from '../EditableT.jsx'
+import AccessibilityWidget from '../AccessibilityWidget.jsx'
 
 const LOGO = '/logo2.png'
 
@@ -244,6 +245,8 @@ export default function Layout({ children }) {
 
       {/* Page content */}
       <main>{children}</main>
+
+      <AccessibilityWidget />
     </div>
   )
 }
