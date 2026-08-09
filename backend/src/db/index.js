@@ -22,16 +22,24 @@ try {
   _dbError = e
 }
 
+// node-sqlite3-wasm rejects `undefined` bindings, so coerce them to null.
+const nn = (v) => (v === undefined ? null : v)
+function sanitizeObject(o) {
+  const out = {}
+  for (const k in o) out[k] = nn(o[k])
+  return out
+}
+
 function normalizeParams(args) {
   if (args.length === 0) return []
   if (args.length === 1) {
     const p = args[0]
     if (p === null || p === undefined) return []
-    if (Array.isArray(p)) return p
-    if (typeof p === 'object') return p
-    return [p]
+    if (Array.isArray(p)) return p.map(nn)
+    if (typeof p === 'object') return sanitizeObject(p)
+    return [nn(p)]
   }
-  return Array.from(args)
+  return Array.from(args, nn)
 }
 
 // Wraps a prepared statement so callers can use better-sqlite3's rest-param style
