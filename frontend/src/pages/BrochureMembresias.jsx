@@ -31,9 +31,10 @@ export default function BrochureMembresias() {
         </div>
       </div>
 
-      {/* Flipbook — full width, aspect-ratio adapts to viewport so there is
-          no empty space (cross-origin iframe can't auto-size to its content) */}
-      <section className="w-full">
+      {/* Flipbook — same max width as the info card below; aspect-ratio adapts
+          to viewport so there is no empty space (cross-origin iframe can't
+          auto-size to its content) */}
+      <section className="px-6 md:px-12 max-w-7xl mx-auto">
         <iframe
           allowFullScreen
           scrolling="no"

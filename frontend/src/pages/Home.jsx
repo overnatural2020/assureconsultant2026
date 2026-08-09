@@ -214,7 +214,7 @@ function Carousel({ displayName, frase }) {
   const [current, setCurrent] = useState(0)
 
   useEffect(() => {
-    const t = setInterval(() => setCurrent(c => (c + 1) % SLIDES.length), 5000)
+    const t = setInterval(() => setCurrent(c => (c + 1) % SLIDES.length), 8000)
     return () => clearInterval(t)
   }, [])
 

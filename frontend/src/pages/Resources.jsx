@@ -1,7 +1,7 @@
 // src/pages/Resources.jsx
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { FileText, Play, Layout, BookOpen, Users, Download, ExternalLink, Video, X } from 'lucide-react'
+import { FileText, Play, Layout, BookOpen, Users, User, Briefcase, Download, ExternalLink, Video, X } from 'lucide-react'
 import api from '../lib/api.js'
 import { useTranslation } from 'react-i18next'
 import EditableT from '../components/EditableT.jsx'
@@ -34,9 +34,9 @@ const BOTON_ICON = {
 
 const TABS = [
   { id: 'todos', labelKey: 'resources.tab_all', icon: FileText },
-  { id: 'material_ventas', labelKey: 'resources.tab_sales', icon: FileText },
-  { id: 'video_capacitacion', labelKey: 'resources.tab_training', icon: Video },
-  { id: 'plantilla_digital', labelKey: 'resources.tab_templates', icon: Layout },
+  { id: 'material_ventas', labelKey: 'resources.tab_sales', icon: User },
+  { id: 'video_capacitacion', labelKey: 'resources.tab_training', icon: Briefcase },
+  { id: 'plantilla_digital', labelKey: 'resources.tab_templates', icon: Users },
 ]
 
 function ResourceCard({ recurso, onVerVideo }) {
