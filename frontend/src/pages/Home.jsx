@@ -330,9 +330,12 @@ export default function Home() {
 
       {/* Presentation video */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 mb-8 text-center">
-        <h2 className="text-3xl font-bold text-[#00565f] mb-8" style={{ fontFamily: "'Arca Majora 3', sans-serif" }}>
-          {lang === 'en' ? 'Meet Assure For Life' : 'Conoce Assure For Life'}
-        </h2>
+        <div className="relative inline-block mb-8">
+          <div className="absolute top-[-1px] left-[-3px] w-[12px] h-[12px] bg-[#eb6e54] rounded-full z-0" />
+          <h2 className="relative z-10 text-3xl font-bold text-[#00565f]" style={{ fontFamily: "'Arca Majora 3', sans-serif" }}>
+            {lang === 'en' ? 'Meet Assure For Life' : 'Conoce Assure For Life'}
+          </h2>
+        </div>
         <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
           <iframe
             className="absolute inset-0 w-full h-full rounded-2xl shadow-lg"
