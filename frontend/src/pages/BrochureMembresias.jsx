@@ -7,8 +7,14 @@ const MEDIA = 'https://media.base44.com/images/public/6907ccd9d7dc18fba4a28df9'
 
 const BROCHURE_URL = 'https://drive.google.com/file/d/1WN7O-mY4QpRcuQDgXT2fHn3tRUMMSMsr/view?usp=drive_link'
 
+const FLIPBOOK_URL = {
+  es: 'https://heyzine.com/flip-book/5101d9d017.html',
+  en: 'https://heyzine.com/flip-book/708055b113.html',
+}
+
 export default function BrochureMembresias() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const flipbookUrl = FLIPBOOK_URL[i18n.language] || FLIPBOOK_URL.es
 
   const FEATURES = [
     { icon: <Award className="w-8 h-8 text-[#7db8b3]" />, title: t('brochure.feature_1_title'), desc: t('brochure.feature_1_desc') },
@@ -40,7 +46,7 @@ export default function BrochureMembresias() {
           scrolling="no"
           title={`${t('brochure.title')} ${t('brochure.title_accent')}`}
           className="fp-iframe block w-full aspect-video"
-          src="https://heyzine.com/flip-book/5101d9d017.html"
+          src={flipbookUrl}
           style={{ border: '1px solid lightgray' }}
         />
       </section>
