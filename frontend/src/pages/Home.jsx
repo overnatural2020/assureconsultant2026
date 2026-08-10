@@ -340,8 +340,8 @@ export default function Home() {
           <iframe
             className="absolute inset-0 w-full h-full rounded-2xl shadow-lg"
             src={lang === 'en'
-              ? 'https://www.youtube.com/embed/ha8RTtWQuf0'
-              : 'https://www.youtube.com/embed/UUerSoATn_8'}
+              ? 'https://www.youtube.com/embed/Bu7LgQMyosU'
+              : 'https://www.youtube.com/embed/sU2J_bbKwDQ'}
             title="Assure For Life"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

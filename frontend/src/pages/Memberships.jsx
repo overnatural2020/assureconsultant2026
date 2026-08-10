@@ -34,8 +34,8 @@ function SilverRateBox({ t, kind, rate, noteKey, dark }) {
     return (
       <div className="bg-[#7db8b3] border border-[#005761] rounded-2xl p-5 text-center flex flex-col justify-center items-center">
         <p className="text-[#00565f] text-xl md:text-2xl font-bold mb-1">{t('memberships.special_rate')}</p>
-        <p className="text-5xl md:text-6xl font-extrabold text-[#00565f] leading-none mb-1">{rate}</p>
-        <p className="text-[#00565f] text-xl md:text-2xl font-bold mb-3">{t('common.monthly')}</p>
+        <p className="text-5xl md:text-6xl font-extrabold text-white leading-none mb-1">{rate}</p>
+        <p className="text-white text-xl md:text-2xl font-bold mb-3">{t('common.monthly')}</p>
         <span className="inline-flex items-center gap-1 bg-[#00565f] text-white text-sm font-bold px-4 py-1 rounded-full mb-3">
           ☆ {t('common.special')}
         </span>
