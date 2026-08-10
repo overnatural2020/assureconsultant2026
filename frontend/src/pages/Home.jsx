@@ -393,7 +393,7 @@ export default function Home() {
 
       {/* Mission footer */}
       <div className="bg-white py-16 mb-8">
-        <div className="max-w-4xl mx-auto text-center px-4">
+        <div className="max-w-5xl mx-auto text-center px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-[#00565f] mb-3" style={{ fontFamily: "'Arca Majora 3', sans-serif" }}>{t('home.mission_title')}</h2>
           <p className="text-2xl md:text-4xl mb-1">
             <span className="text-[#7db8b3] font-bold" style={{ fontFamily: "'Arca Majora 3', sans-serif" }}>{t('home.mission_sub1')}</span>
