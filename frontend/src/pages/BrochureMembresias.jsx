@@ -5,7 +5,10 @@ import { useTranslation } from 'react-i18next'
 
 const MEDIA = 'https://media.base44.com/images/public/6907ccd9d7dc18fba4a28df9'
 
-const BROCHURE_URL = 'https://drive.google.com/file/d/1WN7O-mY4QpRcuQDgXT2fHn3tRUMMSMsr/view?usp=drive_link'
+const BROCHURE_URL = {
+  es: 'https://drive.google.com/file/d/1WN7O-mY4QpRcuQDgXT2fHn3tRUMMSMsr/view?usp=drive_link',
+  en: 'https://drive.google.com/file/d/1WSbtIElGbByCwSlf38uAgWnpgFqlH_da/view?usp=sharing',
+}
 
 const FLIPBOOK_URL = {
   es: 'https://heyzine.com/flip-book/5101d9d017.html',
@@ -15,6 +18,7 @@ const FLIPBOOK_URL = {
 export default function BrochureMembresias() {
   const { t, i18n } = useTranslation()
   const flipbookUrl = FLIPBOOK_URL[i18n.language] || FLIPBOOK_URL.es
+  const brochureUrl = BROCHURE_URL[i18n.language] || BROCHURE_URL.es
 
   const FEATURES = [
     { icon: <Award className="w-8 h-8 text-[#7db8b3]" />, title: t('brochure.feature_1_title'), desc: t('brochure.feature_1_desc') },
@@ -83,7 +87,7 @@ export default function BrochureMembresias() {
               {t('resources.brochure_desc')}
             </p>
             <a
-              href={BROCHURE_URL}
+              href={brochureUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[#eb6e54] hover:bg-[#eb6e54]/90 text-white font-semibold px-6 py-3 transition-colors w-fit rounded-md text-lg"
