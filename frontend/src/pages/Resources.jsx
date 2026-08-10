@@ -32,6 +32,15 @@ const BOTON_ICON = {
   'Acceder': ExternalLink,
 }
 
+// Button labels are stored in Spanish; map them to a translation key so the
+// button follows the active language (falls back to the stored text).
+const BOTON_LABEL_KEY = {
+  'Ver video': 'resources.btn_video',
+  'Descargar': 'resources.btn_download',
+  'Abrir': 'resources.btn_open',
+  'Acceder': 'resources.btn_access',
+}
+
 const TABS = [
   { id: 'todos', labelKey: 'resources.tab_all', icon: FileText },
   { id: 'material_ventas', labelKey: 'resources.tab_sales', icon: User },
@@ -45,6 +54,7 @@ function ResourceCard({ recurso, onVerVideo }) {
   const [imgLoaded, setImgLoaded] = useState(false)
   const FallbackIcon = TIPO_ICON[recurso.tipo] || FileText
   const BtnIcon = BOTON_ICON[recurso.texto_boton] || Download
+  const btnLabel = BOTON_LABEL_KEY[recurso.texto_boton] ? t(BOTON_LABEL_KEY[recurso.texto_boton]) : recurso.texto_boton
   const hasFile = recurso.archivo_url && recurso.archivo_url.trim() !== '' && recurso.archivo_url.trim() !== '#!'
 
   const tipoLabel = {
@@ -93,20 +103,20 @@ function ResourceCard({ recurso, onVerVideo }) {
                 onClick={() => onVerVideo(recurso.archivo_url)}
               >
                 <BtnIcon className="w-4 h-4" />
-                {recurso.texto_boton}
+                {btnLabel}
               </button>
             ) : (
               <a href={recurso.archivo_url} target="_blank" rel="noopener noreferrer" className="mt-auto">
                 <button className="w-full flex items-center justify-center gap-2 bg-[#eb6e54] hover:bg-[#eb6e54]/90 text-white font-semibold py-2 rounded-md transition-colors">
                   <BtnIcon className="w-4 h-4" />
-                  {recurso.texto_boton}
+                  {btnLabel}
                 </button>
               </a>
             )
           ) : (
             <button disabled className="w-full flex items-center justify-center gap-2 mt-auto bg-gray-300 text-gray-500 font-semibold py-2 rounded-md cursor-not-allowed">
               <BtnIcon className="w-4 h-4" />
-              {recurso.texto_boton}
+              {btnLabel}
             </button>
           )
         )}
