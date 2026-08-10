@@ -103,7 +103,7 @@ export default function BrochureMembresias() {
       <section className="py-12 px-6 md:px-12 max-w-7xl mx-auto">
         <div className="flex justify-center mb-10">
           <div className="relative inline-block">
-            <div className="absolute top-[3px] left-[19px] w-[16px] h-[16px] bg-[#eb6e54] rounded-full z-0" />
+            <div className="absolute top-[3px] w-[16px] h-[16px] bg-[#eb6e54] rounded-full z-0" style={{ left: i18n.language === 'en' ? '-4px' : '19px' }} />
             <h2 className="relative z-10 text-center text-[#00565f]" style={{ fontFamily: "'Arca Majora 3', sans-serif", fontSize: 'clamp(1.6rem, 3vw, 2.2rem)' }}>
               {t('brochure.what_offers')} <span className="text-[#7db8b3]">{t('brochure.what_offers_accent')}</span>
             </h2>
