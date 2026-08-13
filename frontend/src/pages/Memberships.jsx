@@ -292,8 +292,8 @@ export default function Memberships() {
               <div className="grid md:grid-cols-2 gap-8">
                 {SILVER.planes.map((plan, idx) => (
                   <div key={idx}>
-                    <div className={`flex mb-4 ${plan.align === 'right' ? 'md:justify-end' : 'justify-start'}`}>
-                      <div className="inline-block px-5 py-2 rounded-lg bg-[#00565f] text-white">
+                    <div className="mb-4">
+                      <div className="block w-full px-5 py-2 rounded-lg bg-[#00565f] text-white text-center">
                         <h3 className="font-bold text-xl">{t(plan.titleKey)}</h3>
                       </div>
                     </div>
