@@ -149,13 +149,16 @@ export default function Memberships() {
     <div className="min-h-screen bg-white">
       {/* Title */}
       <div className="text-center mb-12 px-4 pt-8">
-        <div className="inline-block relative mb-4">
-          <div className="absolute top-[-2px] left-[63px] md:left-[-3px] w-[18px] h-[18px] bg-[#eb6e54] rounded-full z-0" />
+        <div className="inline-block mb-4">
           <h1
-            className="relative z-10 text-5xl md:text-6xl font-bold text-gray-800"
+            className="text-5xl md:text-6xl font-bold text-gray-800"
             style={{ fontFamily: "'Arca Majora 3', sans-serif" }}
           >
-            <span className="text-[#7db8b3]">{t('memberships.page_title_1')}</span>{' '}
+            {/* Dot anchored to the first letter so it tracks it at any width */}
+            <span className="relative">
+              <span className="absolute top-[-2px] left-[-3px] w-[18px] h-[18px] bg-[#eb6e54] rounded-full z-0" aria-hidden="true" />
+              <span className="relative z-10 text-[#7db8b3]">{t('memberships.page_title_1')}</span>
+            </span>{' '}
             <span className="text-[#00565f]">{t('memberships.page_title_2')}</span>
           </h1>
         </div>
