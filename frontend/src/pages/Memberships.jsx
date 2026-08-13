@@ -293,7 +293,7 @@ export default function Memberships() {
                 {SILVER.planes.map((plan, idx) => (
                   <div key={idx}>
                     <div className="mb-4">
-                      <div className="block w-full px-5 py-2 rounded-lg bg-[#00565f] text-white text-center">
+                      <div className="block w-full px-5 py-2 rounded-2xl bg-[#00565f] text-white text-center">
                         <h3 className="font-bold text-xl">{t(plan.titleKey)}</h3>
                       </div>
                     </div>
